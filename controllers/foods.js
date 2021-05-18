@@ -5,6 +5,8 @@ const Food = require('../models/foods');
 ///////////////////////////////////////////////////////////////////////////////////
 
 ////// Create //////
+
+//create comment
 foods.post('/:id/comment', (req, res) => {
 	Food.findById(req.params.id)
 		.then((store) => {
@@ -21,6 +23,7 @@ foods.post('/:id/comment', (req, res) => {
 		);
 });
 
+//create food
 foods.post('/:id/menu', (req, res) => {
 	Food.findById(req.params.id)
 		.then((store) => {
@@ -36,6 +39,7 @@ foods.post('/:id/menu', (req, res) => {
 		);
 });
 
+//create store
 foods.post('/', (req, res) => {
 	Food.create(req.body, (err, createdFood) => {
 		if (err) {
@@ -49,10 +53,38 @@ foods.post('/', (req, res) => {
 });
 
 ////// Read //////
+
+//get store by query params
+foods.get('/store', (req, res) => {
+	Food.find(req.query, (err, foundFood) => {
+		if (err) {
+			res.status(400).json({ message: 'get not successful ' + err });
+		}
+		if (foundFood) {
+			console.log(foundFood);
+			res.json(foundFood);
+		}
+	});
+});
+
+//get store by id
+foods.get('/:id', (req, res) => {
+	Food.findById(req.params.id, (err, foundFood) => {
+		if (err) {
+			res.status(400).json({ message: 'get not successful ' + err });
+		}
+		if (foundFood) {
+			console.log(foundFood);
+			res.json(foundFood);
+		}
+	});
+});
+
+//get all stores
 foods.get('/', (req, res) => {
 	Food.find({}, (err, foundFoods) => {
 		if (err) {
-			res.status(400).json({ message: 'get not successful' });
+			res.status(400).json({ message: 'get not successful ' + err });
 		}
 		if (foundFoods) {
 			console.log(foundFoods);
@@ -100,6 +132,8 @@ foods.put('/:id', (req, res) => {
 });
 
 ////// Delete //////
+
+//delete comment
 foods.delete('/:id/comment', (req, res) => {
 	Food.findById(req.params.id)
 		.then((store) => {
@@ -116,6 +150,7 @@ foods.delete('/:id/comment', (req, res) => {
 		);
 });
 
+//delete food
 foods.delete('/:id/menu', (req, res) => {
 	Food.findByIdAndUpdate(
 		req.params.id,
@@ -139,6 +174,7 @@ foods.delete('/:id/menu', (req, res) => {
 	);
 });
 
+//delete store
 foods.delete('/:id', (req, res) => {
 	Food.findByIdAndRemove(req.params.id, (err, deletedStore) => {
 		if (err) {

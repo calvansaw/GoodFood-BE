@@ -11,6 +11,7 @@ const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema(
 	{
 		name: { type: String, default: 'Anonymous' },
+		username: { type: String, required: true },
 		comment: { type: String, required: true },
 	},
 	{ timestamps: true }
@@ -23,16 +24,17 @@ const menuSchema = new mongoose.Schema({
 });
 
 ////create schema//////
-const foodSchema = new mongoose.Schema(
+const storeSchema = new mongoose.Schema(
 	{
-		storeName: { type: String, required: true },
+		storeName: { type: String, required: true, unique: true },
+		username: { type: String, required: true },
 		menu: { type: [menuSchema], required: true },
 	},
 	{ timestamps: true }
 );
 
 ////create model/////
-const Food = mongoose.model('Food', foodSchema);
+const Food = mongoose.model('Food', storeSchema);
 
 ////export/////
 module.exports = Food;

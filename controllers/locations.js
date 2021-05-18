@@ -18,10 +18,36 @@ locations.post('/', (req, res) => {
 });
 
 ////// Read //////
+
+//get location by center radius
+locations.get('/store', (req, res) => {
+	Location.aggregate([
+		{
+			$geoNear: {
+				near: { type: 'Point', coordinates: req.body },
+				distanceField: 'dist.calculated',
+				maxDistance: 800,
+				//  query: { category: "Parks" },
+				includeLocs: 'dist.location',
+				spherical: true,
+			},
+		},
+	])
+		.then((data) => {
+			console.log(req.body);
+			console.log(data);
+			res.json(data);
+		})
+		.catch((err) =>
+			res.status(400).json({ message: 'get not successful ' + err })
+		);
+});
+
+//get all locations
 locations.get('/', (req, res) => {
 	Location.find({}, (err, foundLocations) => {
 		if (err) {
-			res.status(400).json({ message: 'get not successful' });
+			res.status(400).json({ message: 'get not successful ' + err });
 		}
 		if (foundLocations) {
 			console.log(foundLocations);
