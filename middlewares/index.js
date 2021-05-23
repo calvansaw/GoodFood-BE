@@ -3,7 +3,7 @@ const privateKey = process.env.ACCESS_TOKEN_SECRET;
 
 //middleware function to check if the incoming request is authenticated:
 exports.checkAuth = (req, res, next) => {
-	// get the token stored in the custom header called 'x-auth-token'
+	// get the token stored in Bearer header
 	const bearerHeader = req.headers['authorization'];
 	const bearer = bearerHeader.split(' ');
 	const token = bearer[1];

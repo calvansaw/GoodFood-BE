@@ -20,7 +20,7 @@ router.post('/signup', async (req, res) => {
 			let accessToken = await user.createAccessToken();
 			let refreshToken = await user.createRefreshToken();
 
-			return res.status(201).json({ accessToken, refreshToken });
+			return res.status(201).json({ accessToken, refreshToken, user });
 		}
 	} catch (error) {
 		console.error(error);
@@ -32,6 +32,7 @@ router.post('/signup', async (req, res) => {
 router.post('/login', async (req, res) => {
 	try {
 		//check if user exists in database:
+		console.log(req.body);
 		let user = await User.findOne({ username: req.body.username });
 		//send error if no user found:
 		if (!user) {
@@ -44,7 +45,9 @@ router.post('/login', async (req, res) => {
 				let accessToken = await user.createAccessToken();
 				let refreshToken = await user.createRefreshToken();
 
-				return res.status(201).json({ accessToken, refreshToken });
+				return res
+					.status(201)
+					.json({ accessToken, refreshToken, user });
 			} else {
 				//send error if password is invalid
 				return res.status(401).json({ error: 'Invalid password!' });
@@ -98,6 +101,7 @@ router.post('/refresh_token', async (req, res) => {
 router.delete('/logout', async (req, res) => {
 	try {
 		//delete the refresh token saved in database:
+		console.log(req.body);
 		const { refreshToken } = req.body;
 		await Token.findOneAndDelete({ token: refreshToken });
 		return res.status(200).json({ success: 'User logged out!' });

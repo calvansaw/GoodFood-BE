@@ -19,16 +19,20 @@ const commentSchema = new mongoose.Schema(
 
 const menuSchema = new mongoose.Schema({
 	foodName: { type: String, required: true },
+	foodDesc: String,
+	foodImg: String,
 	price: { type: Number, required: true },
-	comments: { type: [commentSchema], default: undefined },
+	comments: { type: [commentSchema] },
 });
 
 ////create schema//////
 const storeSchema = new mongoose.Schema(
 	{
 		storeName: { type: String, required: true, unique: true },
+		storeDesc: String,
+		storeImg: String,
 		username: { type: String, required: true },
-		menu: { type: [menuSchema], required: true },
+		menu: { type: [menuSchema] },
 	},
 	{ timestamps: true }
 );

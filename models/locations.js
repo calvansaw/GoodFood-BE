@@ -27,19 +27,6 @@ const locationSchema = new mongoose.Schema(
 	{ timestamps: true }
 );
 
-// const locationSchema = new mongoose.Schema(
-// 	{
-// 		storeName: { type: String, required: true, unique: true },
-// 		address: { type: String, required: true, unique: true },
-// 		username: { type: String, required: true },
-// 		point: {
-// 			lat: { type: String, required: true },
-// 			lng: { type: String, required: true },
-// 		},
-// 	},
-// 	{ timestamps: true }
-// );
-
 ////create model/////
 const Location = mongoose.model('Location', locationSchema);
 

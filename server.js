@@ -39,11 +39,9 @@ app.get('/', (req, res) => {
 });
 
 // Controllers
-// const userController = require('./controllers/users');
 const locationController = require('./controllers/locations');
 const foodController = require('./controllers/foods');
 const AuthController = require('./controllers/AuthController');
-// app.use('/user', userController);
 app.use('/location', locationController);
 app.use('/food', foodController);
 app.use('/auth', AuthController);
