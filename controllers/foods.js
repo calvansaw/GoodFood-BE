@@ -1,13 +1,13 @@
 const express = require('express');
 const foods = express.Router();
+const Middleware = require('../middlewares');
 const Food = require('../models/foods');
-
 ///////////////////////////////////////////////////////////////////////////////////
 
 ////// Create //////
 
 //create comment
-foods.post('/:id/comment', (req, res) => {
+foods.post('/:id/comment', Middleware.checkAuth, (req, res) => {
 	Food.findById(req.params.id)
 		.then((store) => {
 			let food = store.menu.id(req.query.food);
@@ -24,7 +24,7 @@ foods.post('/:id/comment', (req, res) => {
 });
 
 //create food
-foods.post('/:id/menu', (req, res) => {
+foods.post('/:id/menu', Middleware.checkAuth, (req, res) => {
 	Food.findById(req.params.id)
 		.then((store) => {
 			store.menu.push(req.body);
@@ -40,7 +40,7 @@ foods.post('/:id/menu', (req, res) => {
 });
 
 //create store
-foods.post('/', (req, res) => {
+foods.post('/', Middleware.checkAuth, (req, res) => {
 	Food.create(req.body, (err, createdFood) => {
 		if (err) {
 			res.status(400).json({ message: 'post not successful ' + err });
@@ -94,7 +94,7 @@ foods.get('/', (req, res) => {
 });
 
 ////// Update //////
-foods.put('/:id', (req, res) => {
+foods.put('/:id', Middleware.checkAuth, (req, res) => {
 	// Find document as usual
 	Food.findById(req.params.id)
 		//use the returned document to find sub-documents by using .id()
@@ -134,7 +134,7 @@ foods.put('/:id', (req, res) => {
 ////// Delete //////
 
 //delete comment
-foods.delete('/:id/comment', (req, res) => {
+foods.delete('/:id/comment', Middleware.checkAuth, (req, res) => {
 	Food.findById(req.params.id)
 		.then((store) => {
 			let food = store.menu.id(req.query.food);
@@ -151,7 +151,7 @@ foods.delete('/:id/comment', (req, res) => {
 });
 
 //delete food
-foods.delete('/:id/menu', (req, res) => {
+foods.delete('/:id/menu', Middleware.checkAuth, (req, res) => {
 	Food.findByIdAndUpdate(
 		req.params.id,
 		{
@@ -175,7 +175,7 @@ foods.delete('/:id/menu', (req, res) => {
 });
 
 //delete store
-foods.delete('/:id', (req, res) => {
+foods.delete('/:id', Middleware.checkAuth, (req, res) => {
 	Food.findByIdAndRemove(req.params.id, (err, deletedStore) => {
 		if (err) {
 			res.status(400).json({ message: 'delete not successful ' + err });
@@ -190,54 +190,3 @@ foods.delete('/:id', (req, res) => {
 module.exports = foods;
 
 ///////////////////////////////////////////////////////////////////////////////////
-// Food.updateOne(
-// 	{
-// 		$and: [
-// 			{ _id: { $eq: req.params.menuId } },
-// 			{ 'menu._id': { $eq: req.params.foodId } },
-// 			{ 'comments._id': { $eq: req.params.commentId } },
-// 		],
-// 	},
-// 	req.body,
-// 	{ new: true },
-// 	(err, updatedFood) => {
-// 		if (err) {
-// 			res.status(400).json({ message: 'put not successful' + err });
-// 		}
-// 		if (updatedFood) {
-// 			console.log(updatedFood);
-// 			res.json(updatedFood);
-// 		}
-// 	}
-// );
-// Food.findOneAndUpdate(
-// 	{ _id: req.params.id, 'menu._id': req.query.food },
-// 	{ $set: { 'menu.$.price': req.body.price } },
-// 	{ new: true },
-// 	(err, updatedFood) => {
-// 		if (err) {
-// 			res.status(400).json({ message: 'put not successful' + err });
-// 		}
-// 		if (updatedFood) {
-// 			console.log(updatedFood);
-// 			res.json(updatedFood);
-// 		}
-// 	}
-// );
-// 	Food.findOneAndUpdate(
-// 		{
-// 			// _id: req.params.id,
-// 			'menu.comments._id': req.params.id,
-// 		},
-// 		req.body,
-// 		{ new: true },
-// 		(err, updatedFood) => {
-// 			if (err) {
-// 				res.status(400).json({ message: 'put not successful' + err });
-// 			}
-// 			if (updatedFood) {
-// 				console.log(updatedFood);
-// 				res.json(updatedFood);
-// 			}
-// 		}
-// 	);
