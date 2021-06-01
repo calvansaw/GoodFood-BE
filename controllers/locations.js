@@ -21,12 +21,19 @@ locations.post('/', (req, res) => {
 
 //get location by center radius
 locations.get('/store', (req, res) => {
+	const { lat, lng, dist } = req.query;
+	const longitude = Number(lng);
+	const latitude = Number(lat);
+	const distance = Number(dist);
+	let coordArray = [longitude, latitude];
+	console.log(coordArray);
+	console.log(distance);
 	Location.aggregate([
 		{
 			$geoNear: {
-				near: { type: 'Point', coordinates: req.body },
+				near: { type: 'Point', coordinates: coordArray },
 				distanceField: 'dist.calculated',
-				maxDistance: 800,
+				maxDistance: distance,
 				//  query: { category: "Parks" },
 				includeLocs: 'dist.location',
 				spherical: true,
