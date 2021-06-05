@@ -104,8 +104,8 @@ const LoginForm = () => {
 				value={values.password}
 				onChange={handleChange}
 				onBlur={handleBlur}
-				error={touched.username && Boolean(errors.username)}
-				helperText={touched.username && errors.username}
+				error={touched.password && Boolean(errors.password)}
+				helperText={touched.password && errors.password}
 				endAdornment={
 					<InputAdornment position="end">
 						<IconButton
