@@ -14,6 +14,7 @@ const userSchema = new mongoose.Schema(
 	{
 		username: { type: String, required: true, unique: true },
 		password: { type: String, required: true },
+		avatar: String,
 		userType: { type: String, required: true, validate: validator },
 	},
 	{ timestamps: true }

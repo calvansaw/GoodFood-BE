@@ -16,6 +16,7 @@ const pointSchema = new mongoose.Schema({
 const locationSchema = new mongoose.Schema(
 	{
 		storeName: { type: String, required: true, unique: true },
+		storeId: { type: String, required: true, unique: true },
 		location: {
 			type: pointSchema,
 			index: '2dsphere',

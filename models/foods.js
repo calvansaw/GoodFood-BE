@@ -31,6 +31,7 @@ const storeSchema = new mongoose.Schema(
 		storeName: { type: String, required: true, unique: true },
 		storeDesc: String,
 		storeImg: String,
+		storeAvatar: String,
 		username: { type: String, required: true },
 		menu: { type: [menuSchema] },
 	},
