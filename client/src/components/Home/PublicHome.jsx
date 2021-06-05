@@ -47,8 +47,8 @@ const PublicHome = ({ stores, locations, allLocations }) => {
 										position: 'fixed',
 										width: '45%',
 										height: '60%',
-										top: '15%',
-										right: '2%',
+										top: '22%',
+										right: '5%',
 									}}
 								/>
 							}
