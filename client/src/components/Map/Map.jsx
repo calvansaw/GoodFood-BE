@@ -7,6 +7,7 @@ import {
 	Marker,
 	InfoWindow,
 } from 'react-google-maps';
+import { useHistory } from 'react-router-dom';
 import Geocode from 'react-geocode';
 
 Geocode.setApiKey(process.env.REACT_APP_MAP_API_KEY);
@@ -23,6 +24,7 @@ const reducer = (accumulator, currentValue) => {
 const Map = withScriptjs(
 	withGoogleMap(({ storeLocations }) => {
 		const { state, dispatch } = useContext(LocationContext);
+		let history = useHistory();
 		const handleDragEnd = (event) => {
 			const lng = event.latLng.lng();
 			const lat = event.latLng.lat();
@@ -64,16 +66,15 @@ const Map = withScriptjs(
 						const dist = store.dist?.calculated.toFixed(2);
 						return (
 							<Marker
+								onClick={() =>
+									history.push(`/store/menu/${store.storeId}`)
+								}
 								key={index}
 								position={{ lat: latitude, lng: longitude }}
 							>
 								<InfoWindow>
 									<>
-										<a
-											href={`/store/menu/${store.storeId}`}
-										>
-											<div>{store.storeName}</div>
-										</a>
+										<div>{store.storeName}</div>
 										<div>distance: {dist}m away</div>
 									</>
 								</InfoWindow>
