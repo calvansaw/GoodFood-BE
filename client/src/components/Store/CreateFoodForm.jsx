@@ -23,8 +23,7 @@ const CreateFoodForm = () => {
 				foodImg: values.foodImg,
 				price: values.price,
 			};
-			console.log(payload);
-			console.log(id);
+
 			return CreateFood(id, payload);
 		},
 		{
@@ -44,7 +43,6 @@ const CreateFoodForm = () => {
 	);
 
 	const submit = useCallback((values) => {
-		console.log(values);
 		mutate(values);
 	}, []);
 

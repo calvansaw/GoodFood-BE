@@ -44,7 +44,6 @@ const CreateCommentForm = ({ foodId, storeId }) => {
 	);
 
 	const submit = useCallback((values) => {
-		console.log(values);
 		mutate(values);
 		resetForm();
 	}, []);

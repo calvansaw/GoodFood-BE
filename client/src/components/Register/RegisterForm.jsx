@@ -83,7 +83,6 @@ const RegisterForm = () => {
 	const handleClickShowPassword = () => {
 		setShowPassword(!showPassword);
 	};
-	console.log(state);
 	return (
 		<form onSubmit={handleSubmit}>
 			<InputLabel htmlFor="username">Username</InputLabel>

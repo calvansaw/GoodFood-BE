@@ -70,7 +70,6 @@ const CommentCard = ({ comment, foodId, storeId, setDrawer }) => {
 	);
 
 	const submit = useCallback((values) => {
-		console.log(values);
 		editComment(values);
 	}, []);
 

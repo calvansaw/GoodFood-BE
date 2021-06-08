@@ -41,7 +41,6 @@ const EditFoodDialogForm = forwardRef(
 		);
 
 		const submit = useCallback((values) => {
-			console.log(values);
 			mutate(values);
 		}, []);
 

@@ -3,9 +3,7 @@ import Axios from '../utils/Axios';
 const SignOut = async () => {
 	try {
 		const refreshToken = localStorage.getItem('refresh');
-		console.log({
-			refreshToken,
-		});
+
 		const { data } = await Axios.delete(
 			`${process.env.REACT_APP_BACKEND_URL}/auth/logout`,
 			{
@@ -16,7 +14,7 @@ const SignOut = async () => {
 				data: { refreshToken },
 			}
 		);
-		console.log(data);
+
 		localStorage.clear();
 		return data;
 	} catch (err) {
