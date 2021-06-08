@@ -1,17 +1,8 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import clsx from 'clsx';
-import {
-	Grid,
-	IconButton,
-	Input,
-	InputLabel,
-	InputAdornment,
-	Button,
-	TextField,
-} from '@material-ui/core';
+import { Grid, InputLabel, Button, TextField } from '@material-ui/core';
 import useStyles from './CreateFoodForm.styles';
-import { Formik, useFormik } from 'formik';
-import { AuthContext } from '../../contexts/AuthContext';
+import { useFormik } from 'formik';
 import { useHistory, useParams } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
@@ -22,7 +13,6 @@ import CreateFood from '../../endpoints/CreateFood';
 const CreateFoodForm = () => {
 	let history = useHistory();
 	const { id } = useParams();
-	const { state, dispatch } = useContext(AuthContext);
 	const { enqueueSnackbar } = useSnackbar();
 	const queryClient = useQueryClient();
 	const { mutate } = useMutation(

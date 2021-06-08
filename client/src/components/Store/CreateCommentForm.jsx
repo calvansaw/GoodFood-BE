@@ -1,18 +1,10 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import clsx from 'clsx';
-import {
-	Grid,
-	IconButton,
-	Input,
-	InputLabel,
-	InputAdornment,
-	Button,
-	TextField,
-} from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 import useStyles from './CreateCommentForm.styles';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { AuthContext } from '../../contexts/AuthContext';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
 import { STORES } from '../../constants/queryKeys';
@@ -21,8 +13,7 @@ import CreateComment from '../../endpoints/CreateComment';
 
 const CreateCommentForm = ({ foodId, storeId }) => {
 	let history = useHistory();
-	// const { id } = useParams();
-	const { state, dispatch } = useContext(AuthContext);
+	const { state } = useContext(AuthContext);
 	const { enqueueSnackbar } = useSnackbar();
 	const queryClient = useQueryClient();
 	const { mutate } = useMutation(
@@ -33,8 +24,7 @@ const CreateCommentForm = ({ foodId, storeId }) => {
 				comment: values.comment,
 				username: state.user.username,
 			};
-			// console.log(payload);
-			// console.log(id);
+
 			return CreateComment(storeId, foodId, payload);
 		},
 		{
@@ -85,7 +75,6 @@ const CreateCommentForm = ({ foodId, storeId }) => {
 		<form onSubmit={handleSubmit}>
 			<Grid container className={classes.margin}>
 				<Grid item xs={12}>
-					{/* <InputLabel htmlFor="name">Food Name</InputLabel> */}
 					<TextField
 						className={clsx(classes.margin, classes.textField)}
 						id="name"
@@ -94,13 +83,9 @@ const CreateCommentForm = ({ foodId, storeId }) => {
 						value={values.name}
 						onChange={handleChange}
 						placeholder="Name"
-						// onBlur={handleBlur}
-						// error={touched.name && Boolean(errors.name)}
-						// helperText={touched.name && errors.name}
 					/>
 				</Grid>
 				<Grid item xs={12}>
-					{/* <InputLabel htmlFor="comment">Food Description</InputLabel> */}
 					<TextField
 						className={clsx(classes.margin, classes.textField)}
 						id="comment"

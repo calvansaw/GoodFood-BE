@@ -1,16 +1,8 @@
-import React, { useState, useContext, useCallback } from 'react';
+import React, { useContext, useCallback } from 'react';
 import clsx from 'clsx';
-import {
-	Grid,
-	IconButton,
-	Input,
-	InputLabel,
-	InputAdornment,
-	Button,
-	TextField,
-} from '@material-ui/core';
+import { Grid, InputLabel, Button, TextField } from '@material-ui/core';
 import useStyles from './CreateStoreForm.styles';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { AuthContext } from '../../contexts/AuthContext';
 import CreateStore from '../../endpoints/CreateStore';
 import { useHistory } from 'react-router-dom';
@@ -21,7 +13,7 @@ import * as yup from 'yup';
 
 const CreateStoreForm = () => {
 	let history = useHistory();
-	const { state, dispatch } = useContext(AuthContext);
+	const { state } = useContext(AuthContext);
 	const { enqueueSnackbar } = useSnackbar();
 	const queryClient = useQueryClient();
 	const { mutate } = useMutation(

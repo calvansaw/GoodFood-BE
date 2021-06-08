@@ -1,24 +1,21 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useEffect, useContext, useCallback } from 'react';
 import clsx from 'clsx';
 import {
 	Grid,
-	IconButton,
-	Input,
 	InputLabel,
-	InputAdornment,
 	Button,
 	FormHelperText,
 	TextField,
 } from '@material-ui/core';
 import useStyles from './CreateLocationForm.styles';
-import { Formik, useFormik } from 'formik';
+import { useFormik } from 'formik';
 import { AuthContext } from '../../contexts/AuthContext';
 import { LocationContext } from '../../contexts/LocationContext';
 import CreateLocation from '../../endpoints/CreateLocation';
 import { useHistory } from 'react-router-dom';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
-import { ALL_LOCATIONS, LOCATIONS } from '../../constants/queryKeys';
+import { ALL_LOCATIONS } from '../../constants/queryKeys';
 import Map from '../Map/Map';
 import * as yup from 'yup';
 

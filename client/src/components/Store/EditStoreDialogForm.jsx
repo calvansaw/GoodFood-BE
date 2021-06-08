@@ -1,24 +1,8 @@
-import React, {
-	useState,
-	useContext,
-	useCallback,
-	forwardRef,
-	useImperativeHandle,
-} from 'react';
+import React, { useCallback, forwardRef, useImperativeHandle } from 'react';
 import clsx from 'clsx';
-import {
-	Grid,
-	IconButton,
-	Input,
-	InputLabel,
-	InputAdornment,
-	Button,
-	TextField,
-} from '@material-ui/core';
+import { Grid, InputLabel, TextField } from '@material-ui/core';
 import useStyles from './EditStoreDialogForm.styles';
-import { Formik, useFormik } from 'formik';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useHistory, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
 import { STORES } from '../../constants/queryKeys';
@@ -27,9 +11,6 @@ import EditStore from '../../endpoints/EditStore';
 
 const EditStoreDialogForm = forwardRef(
 	({ storeId, closeDialog, store }, ref) => {
-		// let history = useHistory();
-		// const { id } = useParams();
-		// const { state, dispatch } = useContext(AuthContext);
 		const { enqueueSnackbar } = useSnackbar();
 		const queryClient = useQueryClient();
 		const { mutate } = useMutation(
@@ -39,8 +20,7 @@ const EditStoreDialogForm = forwardRef(
 					storeDesc: values.storeDesc,
 					storeImg: values.storeImg,
 				};
-				// console.log(payload);
-				// console.log(id);
+
 				return EditStore(storeId, payload);
 			},
 			{

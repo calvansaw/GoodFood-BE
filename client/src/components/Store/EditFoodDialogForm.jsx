@@ -1,24 +1,8 @@
-import React, {
-	useState,
-	useContext,
-	useCallback,
-	forwardRef,
-	useImperativeHandle,
-} from 'react';
+import React, { useCallback, forwardRef, useImperativeHandle } from 'react';
 import clsx from 'clsx';
-import {
-	Grid,
-	IconButton,
-	Input,
-	InputLabel,
-	InputAdornment,
-	Button,
-	TextField,
-} from '@material-ui/core';
+import { Grid, InputLabel, TextField } from '@material-ui/core';
 import useStyles from './EditFoodDialogForm.styles';
-import { Formik, useFormik } from 'formik';
-import { AuthContext } from '../../contexts/AuthContext';
-import { useHistory, useParams } from 'react-router-dom';
+import { useFormik } from 'formik';
 import { useMutation, useQueryClient } from 'react-query';
 import { useSnackbar } from 'notistack';
 import { STORES } from '../../constants/queryKeys';
@@ -27,9 +11,6 @@ import EditFood from '../../endpoints/EditFood';
 
 const EditFoodDialogForm = forwardRef(
 	({ storeId, foodId, closeDialog, food }, ref) => {
-		// let history = useHistory();
-		// const { id } = useParams();
-		// const { state, dispatch } = useContext(AuthContext);
 		const { enqueueSnackbar } = useSnackbar();
 		const queryClient = useQueryClient();
 		const { mutate } = useMutation(
@@ -40,8 +21,7 @@ const EditFoodDialogForm = forwardRef(
 					foodImg: values.foodImg,
 					price: values.price,
 				};
-				// console.log(payload);
-				// console.log(id);
+
 				return EditFood(storeId, foodId, payload);
 			},
 			{

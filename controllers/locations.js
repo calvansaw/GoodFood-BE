@@ -35,7 +35,6 @@ locations.get('/store', (req, res) => {
 				near: { type: 'Point', coordinates: coordArray },
 				distanceField: 'dist.calculated',
 				maxDistance: distance,
-				//  query: { category: "Parks" },
 				includeLocs: 'dist.location',
 				spherical: true,
 			},

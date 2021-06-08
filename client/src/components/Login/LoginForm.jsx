@@ -17,8 +17,7 @@ import { useSnackbar } from 'notistack';
 import * as yup from 'yup';
 
 const LoginForm = () => {
-	// let history = useHistory();
-	const { state, dispatch } = useContext(AuthContext);
+	const { dispatch } = useContext(AuthContext);
 	const { enqueueSnackbar } = useSnackbar();
 	const { mutate } = useMutation(
 		(values) => {

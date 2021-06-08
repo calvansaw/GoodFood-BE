@@ -5,7 +5,6 @@ import React, {
 	useContext,
 	useMemo,
 } from 'react';
-import clsx from 'clsx';
 import { useSnackbar } from 'notistack';
 import { useMutation, useQueryClient } from 'react-query';
 import { STORES } from '../../constants/queryKeys';
@@ -13,16 +12,10 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import Grid from '@material-ui/core/Grid';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import Button from '@material-ui/core/Button';
@@ -43,16 +36,10 @@ const StoreCard = ({ store }) => {
 	const { state } = useContext(AuthContext);
 	const { enqueueSnackbar } = useSnackbar();
 	const queryClient = useQueryClient();
-	// console.log(store);
 	const [anchorEl, setAnchorEl] = useState(null);
 
-	const { storeName, storeDesc, storeImg, username, menu, _id } = store;
+	const { storeName, storeDesc, storeImg, username, _id } = store;
 	const classes = useStyles();
-	const [expanded, setExpanded] = useState(false);
-
-	const handleExpandClick = () => {
-		setExpanded(!expanded);
-	};
 
 	const handleMoreClick = (event) => {
 		setAnchorEl(event.currentTarget);

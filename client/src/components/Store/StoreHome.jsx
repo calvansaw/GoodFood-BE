@@ -1,28 +1,13 @@
-import React, { useState, useContext, useEffect, useMemo } from 'react';
-import clsx from 'clsx';
-import {
-	Grid,
-	IconButton,
-	Input,
-	InputLabel,
-	InputAdornment,
-	Button,
-	Typography,
-} from '@material-ui/core';
-// import useStyles from './XXXForm.styles';
-import { Formik, useFormik } from 'formik';
+import React, { useState, useContext, useMemo } from 'react';
+import { Grid, Button, Typography } from '@material-ui/core';
 import { AuthContext } from '../../contexts/AuthContext';
-import GetStoreQuery from '../../endpoints/GetStoreQuery';
-import { Link, useHistory } from 'react-router-dom';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import StoreCard from './StoreCard';
-import { useQuery } from 'react-query';
-import { STORES } from '../../constants/queryKeys';
 import Divider from '@material-ui/core/Divider';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import { DialogContent, DialogContentText } from '@material-ui/core';
+import { DialogContent } from '@material-ui/core';
 import EditLocationDialogForm from './EditLocationDialogForm';
 
 const StoreHome = ({ stores, allLocations }) => {
@@ -51,7 +36,6 @@ const StoreHome = ({ stores, allLocations }) => {
 		setOpenEditLocationsDialog(false);
 	};
 
-	console.log(stores);
 	return (
 		<>
 			<Grid container alignItems="center" direction="column" wrap>

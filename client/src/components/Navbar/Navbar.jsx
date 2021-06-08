@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 import {
 	AppBar,
 	Toolbar,
@@ -13,25 +13,14 @@ import { AccountCircle } from '@material-ui/icons';
 import { AuthContext } from '../../contexts/AuthContext';
 import useStyles from './Navbar.styles';
 import SignOut from '../../endpoints/SignOut';
-import { useHistory, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-	// let history = useHistory();
 	const { state, dispatch } = useContext(AuthContext);
-	const { isAuth, isOwner } = useMemo(
-		() => ({
-			isAuth: state.isAuth,
-			isOwner: state.user?.userType === 'owner',
-		}),
-		[state]
-	);
+
 	const classes = useStyles();
 	const [anchorEl, setAnchorEl] = React.useState(null);
 	const open = Boolean(anchorEl);
-
-	// const handleMenu = (event) => {
-	// 	setAnchorEl(event.currentTarget);
-	// };
 
 	const handleClose = () => {
 		setAnchorEl(null);

@@ -1,10 +1,4 @@
 import React, { useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
-import GetLocations from '../../endpoints/GetLocations';
-import { STORES, LOCATIONS } from '../../constants/queryKeys';
-import GetByCenterRadius from '../../endpoints/GetByCenterRadius';
-import { LocationContext } from '../../contexts/LocationContext';
-import { useSnackbar } from 'notistack';
 import { Grid, Typography, Button } from '@material-ui/core';
 import StoreCard from '../Store/StoreCard';
 import Map from '../Map/Map';
